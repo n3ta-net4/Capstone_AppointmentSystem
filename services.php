@@ -8,11 +8,11 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'user') {
 include 'db.php';
 $user = $_SESSION['user'];
 
-// Fetch services from database
+
 $stmt = $pdo->query("SELECT * FROM grooming_services ORDER BY category, service_name");
 $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Group services by category
+
 $groupedServices = [];
 foreach ($services as $service) {
     $groupedServices[$service['category']][] = $service;
