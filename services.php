@@ -40,7 +40,6 @@ foreach ($services as $service) {
             background-color: #f5f7fa;
         }
 
-        /* Copy sidebar styles from booking_calendar.php */
         .sidebar {
             width: 240px;
             background-color: #2c3e50;
