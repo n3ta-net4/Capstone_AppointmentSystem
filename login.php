@@ -125,12 +125,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             height: 30px;
             pointer-events: none; 
         }
+
+        .back-text {
+            position: absolute;
+            top: 15px;
+            left: 50px;
+            color: #000;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
     <button class="back-button" onclick="window.location.href='main.php';">
         <img src="dog-paw.png" alt="back_button">
     </button>
+    <span class="back-text">Click paw to go back</span>
     <div class="auth-container">
         <h2>Login to Your Account</h2>
         <?php if (isset($error)): ?>

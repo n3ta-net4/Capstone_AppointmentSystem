@@ -4,6 +4,7 @@ include 'db.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
     $email = $_POST['email'];
+    $phone = $_POST['phone'];
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
     $role = 'user';
 
@@ -14,8 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($user) {
         $error = "Email already registered!";
     } else {
-        $stmt = $pdo->prepare('INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)');
-        $stmt->execute([$name, $email, $password, $role]);
+        $stmt = $pdo->prepare('INSERT INTO users (name, email, phone, password, role) VALUES (?, ?, ?, ?, ?)');
+        $stmt->execute([$name, $email, $phone, $password, $role]);
         header("Location: login.php");
         exit();
     }
@@ -124,12 +125,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             height: 30px;
             pointer-events: none; 
         }
+
+        .back-text {
+            position: absolute;
+            top: 15px;
+            left: 50px;
+            color: #000;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
         <button class="back-button" onclick="window.location.href='main.php';">
-        <img src="dog-paw.png" alt="back_button">
+            <img src="dog-paw.png" alt="back_button">
         </button>
+        <span class="back-text">Click paw to go back</span>
 <div class="auth-container">
     <h2>Register</h2>
     <?php if (isset($error)): ?>
@@ -138,6 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <form action="register.php" method="POST">
         <input type="text" name="name" placeholder="Full Name" required>
         <input type="email" name="email" placeholder="Email" required>
+        <input type="tel" name="phone" placeholder="Mobile Phone Number" required>
         <input type="password" name="password" placeholder="Password" required>
         <button class="sub-button" button type="submit">Register</button><br><br>
         <p>Already have an account? <a href="login.php">Login here</a></p>
